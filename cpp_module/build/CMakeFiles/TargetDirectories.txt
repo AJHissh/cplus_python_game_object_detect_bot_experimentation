@@ -1,3 +1,0 @@
-C:/Users/Andrew/Desktop/code/monster_hunting_bot/cpp_module/build/CMakeFiles/bot_controller.dir
-C:/Users/Andrew/Desktop/code/monster_hunting_bot/cpp_module/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/Andrew/Desktop/code/monster_hunting_bot/cpp_module/build/CMakeFiles/ZERO_CHECK.dir
