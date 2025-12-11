@@ -18,9 +18,9 @@ find_path(OpenCV_INCLUDE_DIRS
     REQUIRED
 )
 
-# Find OpenCV library - use the exact name from your system
+# Find OpenCV library
 find_library(OpenCV_LIBS
-    NAMES opencv_world4100  # Your exact library name
+    NAMES opencv_world4100 
     PATHS "${OPENCV_ROOT}/build/x64/vc16/lib"
     REQUIRED
 )
@@ -84,5 +84,6 @@ set_target_properties(bot_controller PROPERTIES
     SUFFIX ".pyd"
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/Release"
 )
+
 
 message(STATUS "Build configuration complete")
