@@ -1,0 +1,10 @@
+^C:\USERS\ANDREW\DESKTOP\CODE\MONSTER_HUNTING_BOT\CPP_MODULE\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Andrew/Desktop/code/monster_hunting_bot/cpp_module -BC:/Users/Andrew/Desktop/code/monster_hunting_bot/cpp_module/build --check-stamp-file C:/Users/Andrew/Desktop/code/monster_hunting_bot/cpp_module/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
