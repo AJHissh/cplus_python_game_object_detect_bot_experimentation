@@ -9,27 +9,19 @@ class YOLODetector:
         self.model = YOLO(model_path)
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         print(f"Using device: {self.device}")
-        
-        # Load model and move to appropriate device
         self.model = YOLO(model_path)
         self.model.to(self.device)
-        
-        # Use half-precision for faster inference
         if self.device == 'cuda':
             self.model.model.half()
-            print("✅ Using CUDA with half-precision (FP16)")
         else:
-            print("⚠️ CUDA not available, using CPU")
-        
+            print('error')
         print("YOLO model loaded successfully!")
         
 
     def bbox_overlap(self, bbox1, bbox2, overlap_threshold=0.15):
-        """Check if two bounding boxes overlap significantly"""
         x1_1, y1_1, x2_1, y2_1 = bbox1
         x1_2, y1_2, x2_2, y2_2 = bbox2
         
-        # Calculate intersection area
         inter_x1 = max(x1_1, x1_2)
         inter_y1 = max(y1_1, y1_2)
         inter_x2 = min(x2_1, x2_2)
@@ -39,19 +31,16 @@ class YOLODetector:
             return False
         
         inter_area = (inter_x2 - inter_x1) * (inter_y2 - inter_y1)
-        
-        # Calculate union area
+
         area1 = (x2_1 - x1_1) * (y2_1 - y1_1)
         area2 = (x2_2 - x1_2) * (y2_2 - y1_2)
         union_area = area1 + area2 - inter_area
-        
-        # Calculate IoU
+
         iou = inter_area / union_area if union_area > 0 else 0
         
         return iou >= overlap_threshold
     
     def detect_objects(self, frame, confidence_threshold=0.20):
-        """Detect all objects in frame with class conflict resolution"""
         try:
             results = self.model(frame, conf=confidence_threshold, verbose=False)
             all_detections = []
@@ -66,7 +55,6 @@ class YOLODetector:
                         bbox = boxes.xyxy[i].astype(int)
                         class_name = self.model.names[class_id]
                         
-                        # Only detect specific classes
                         if class_name not in ['Monster', 'Farm', 'Human', 'Cursor', 'Portal']:
                             continue
                         
@@ -99,4 +87,5 @@ class YOLODetector:
             
         except Exception as e:
             print(f"Detection error: {e}")
+
             return []
